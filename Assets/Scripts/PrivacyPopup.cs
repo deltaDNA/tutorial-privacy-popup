@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DeltaDNA;
 
@@ -9,6 +8,7 @@ public class PrivacyPopup : MonoBehaviour
     private DateTime retryUntil;
     private const int retryDurationSeconds = 60;
     private bool waiting = false;
+    private bool privacyPopUpVisible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +26,10 @@ public class PrivacyPopup : MonoBehaviour
                 StartCoroutine(WaitForDDNA());
             }
         }
-        else
+        else if (!privacyPopUpVisible)
         {
             Debug.Log("Destroying PrivacyPolicy Popup - Retry Duration Exceeded");
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -73,6 +73,7 @@ public class PrivacyPopup : MonoBehaviour
                 // and button images have been downloaded.
                 imageMessage.OnDidReceiveResources += () => {
                     Debug.Log("Image Message loaded resources.");
+                    privacyPopUpVisible = true; 
                     imageMessage.Show();
                 };
 
