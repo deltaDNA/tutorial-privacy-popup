@@ -11,7 +11,7 @@ The output of this tutorial is a **Prefab** package that can be imported into an
 The following steps show you how to use the privacy policy prefab in your own projects with minimal integration.
 
 ### Download the Privacy Policy Prefab
-1 -  Download the latest Privacy Policy prefab file from the [Releases](releases) page. 
+1 -  Download the latest Privacy Policy prefab file from the [Releases](/releases) page. 
 
 2 - Import it into your Unity project by selecting the Assets > Import Package > Custom Package option on the Unity Editor menu, then select the downloaded package file and import it. 
 
