@@ -37,7 +37,7 @@ public class Tutorial : MonoBehaviour
         if (RandomiseUserID) userID = System.Guid.NewGuid().ToString();
 
         DDNA.Instance.StartSDK(userID);
-
+        
         UpdateHud();
     }
 
@@ -53,7 +53,10 @@ public class Tutorial : MonoBehaviour
         txtSdkVersion.GetComponent<Text>().text = "DDNA Sdk Version: " + Settings.SDK_VERSION;
 
         var txtUnityVersion = GameObject.Find("txtUnityVersion");
-        txtUnityVersion.GetComponent<Text>().text = "Unity Version : " + Application.unityVersion; 
+        txtUnityVersion.GetComponent<Text>().text = "Unity Version : " + Application.unityVersion;
+
+        var txtLocale = GameObject.Find("txtLocale");
+        txtLocale.GetComponent<Text>().text = "Locale : " + ClientInfo.Locale;
     }
 
 

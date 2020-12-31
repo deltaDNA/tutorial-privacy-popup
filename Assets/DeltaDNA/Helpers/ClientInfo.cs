@@ -17,6 +17,9 @@
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
+#if UNITY_IOS
+using System.Runtime.InteropServices;
+#endif
 
 namespace DeltaDNA
 {
@@ -427,8 +430,17 @@ namespace DeltaDNA
                 currentOffset.Hours);
         }
 
+        #if UNITY_IOS
+        [DllImport("__Internal")]
+        private static extern string getIOSCountryCode();
+        #endif
+
         private static string GetCountryCode()
         {
+            #if UNITY_IOS
+            return getIOSCountryCode();
+            #endif
+
             // Not supported in Unity.
             return null;
         }
