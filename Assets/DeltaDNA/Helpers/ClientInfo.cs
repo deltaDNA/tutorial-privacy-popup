@@ -17,8 +17,14 @@
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
+
 #if UNITY_IOS
 using System.Runtime.InteropServices;
+#endif
+
+#if UNITY_ANDROID
+using System.Runtime.InteropServices;
+
 #endif
 
 namespace DeltaDNA
@@ -27,10 +33,13 @@ namespace DeltaDNA
     /// The ClientInfo class determines facts about the device the game is being played on.  The
     /// results are formatted to be valid game parameter values.
     /// </summary>
+    
     static class ClientInfo
     {
+        
         private static string platform = null;
 
+        private static LocalePluginWrapper localeAndroid;
         /// <summary>
         /// The platform the game is being played on.
         /// </summary>
@@ -430,17 +439,20 @@ namespace DeltaDNA
                 currentOffset.Hours);
         }
 
-        #if UNITY_IOS
+#if UNITY_IOS
         [DllImport("__Internal")]
         private static extern string getIOSCountryCode();
-        #endif
-
+#endif
         private static string GetCountryCode()
         {
             #if UNITY_IOS
             return getIOSCountryCode();
             #endif
 
+            #if UNITY_ANDROID
+            localeAndroid = new LocalePluginWrapper();
+            return localeAndroid.GetAndroidLocale();
+            #endif
             // Not supported in Unity.
             return null;
         }
@@ -511,6 +523,6 @@ namespace DeltaDNA
             return value.Substring(0, Math.Min(value.Length, length));
         }
 
-        #endregion
+#endregion
     }
 }
