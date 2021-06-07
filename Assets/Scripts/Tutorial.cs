@@ -56,8 +56,6 @@ public class Tutorial : MonoBehaviour
         txtUnityVersion.GetComponent<Text>().text = "Unity Version : " + Application.unityVersion; 
     }
 
-
-   
     private void PrintToConsole(string logString, string stackTrace, LogType type)
     {
         // Prints Debug info to the UI
